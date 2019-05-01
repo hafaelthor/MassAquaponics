@@ -1,0 +1,5 @@
+#hide databases
+*.sqlite3
+
+#this is pretty useless to the code itself
+__pycache__/
