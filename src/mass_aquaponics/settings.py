@@ -33,6 +33,10 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     #Internal apps
     'home',
+    'iot',
+
+    #Third party packages,
+    'channels',
 
     #Django contributions
     'django.contrib.admin',
@@ -72,7 +76,34 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'mass_aquaponics.wsgi.application'
+ASGI_APPLICATION = 'mass_aquaponics.asgi.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('127.0.0.1', 6379)],
+        },
+    },
+}
+'''
+the Redis Channel Layer will provide the capability
+of the ASGI Applications to communicate between themselves
+and with the other parts of the project.
 
+It's sort of an internal protocol that permits consumers
+to communicate while still being "untracked" by a global 
+object or so. For that, it uses Redis a its backing store.
+
+So, for the application to work, you'll need to have a
+redis image running. A way to do that is by running it
+with docker as follows (instructions for linux):
+$ sudo docker run -p 6379:6379 -d redis
+It will return the container identification (<CONTAINER_ID>)
+
+If you want to halt the docker container, run:
+$ sudo docker ps #get the container identification (<CONTAINER_ID>)
+$ sudo docker stop <CONTAINER_ID>
+'''
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -89,18 +120,10 @@ DATABASES = {
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
 
@@ -108,13 +131,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
+TIME_ZONE = 'America/Recife'
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
