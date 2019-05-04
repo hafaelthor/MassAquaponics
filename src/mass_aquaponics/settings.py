@@ -37,6 +37,7 @@ INSTALLED_APPS = [
 
     #Third party packages,
     'channels',
+    'webpack_loader',
 
     #Django contributions
     'django.contrib.admin',
@@ -141,3 +142,25 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+def webpack_config (name):
+    '''
+    Create webpack configuration to load a bundle
+    generated. The django-webpack-loader seeks
+    the webpack-stats.json file and then refers
+    to the generated bundles inside a app
+
+    Inputs
+    ------
+    name    str (app_name)
+    '''
+    return {
+        'CACHE': not DEBUG,
+        'BUNDLE_DIR_NAME': f'{os.path.join("dist", name)}/',
+        'STATS_FILE': os.path.join(BASE_DIR, name, 'webpack-stats.json'),
+        'POLL_INTERVAL': 0.1,
+        'TIMEOUT': None,
+        'IGNORE': [r'.+\.hot-update.js', r'.+\.map']
+    }
+
+WEBPACK_LOADER = {}

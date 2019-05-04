@@ -3,3 +3,7 @@
 
 #this is pretty useless to the code itself
 __pycache__/
+
+# webpack-stats.json files are auto-generated
+# and are particular to each file system
+/src/*/webpack-stats.json

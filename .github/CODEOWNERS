@@ -1,0 +1,22 @@
+# CODEOWNERS FILE FOR MASS AQUAPONICS PROJECT 
+# This will, hopefully, improve the management
+# and division of tasks of collaborators
+
+# COLABORATORS
+# @hafaelthor
+# @JorbFreire
+
+# @hafaelthor is the owner of the repository
+# so, it'll have access to change all the files
+*                           @hafaelthor
+
+# @JorbFreire will be responsible for frontend management
+# so, it should be responsible for all the .js, .css, .html 
+# etc. and derivates in the static/ folder of each app. 
+# He'll also manage packages at node_modules
+/src/package.json           @JorbFreire
+/src/package-lock.json      @JorbFreire
+/src/webpack.config.js      @JorbFreire
+/src/.babelrc               @JorbFreire
+/src/node_modules/          @JorbFreire
+/src/**/static/             @JorbFreire
