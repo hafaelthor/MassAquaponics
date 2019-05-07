@@ -163,4 +163,6 @@ def webpack_config (name):
         'IGNORE': [r'.+\.hot-update.js', r'.+\.map']
     }
 
-WEBPACK_LOADER = {}
+WEBPACK_LOADER = {
+    'HOME': webpack_config('home')
+}

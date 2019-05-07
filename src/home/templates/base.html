@@ -1,0 +1,31 @@
+{% load render_bundle from webpack_loader %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% render_bundle 'imports'  'css' 'HOME' %}
+    {% render_bundle 'basic'    'css' 'HOME' %}
+    {% block head %}
+    {% endblock %}
+    <title>{% block title %}Generic{% endblock %} - Mass Aquaponics</title>
+</head>
+<body>
+    {% include 'header.html' %}
+    <main class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                {% block content %}
+                    <div class="pt-4 pb-4">
+                        <p class="text-muted text-center">page currently empty</p>
+                    </div>
+                {% endblock %}
+            </div>
+        </div>
+    </main>
+    {% include 'footer.html' %}
+    {% render_bundle 'imports'  'js' 'HOME' %}
+    {% render_bundle 'basic'    'js' 'HOME' %}
+</body>
+</html>

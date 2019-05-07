@@ -150,4 +150,6 @@ function bundle (appName, entryFiles=['main.js']) {
     }
 }
 
-module.exports = [];
+module.exports = [
+    bundle('home', ['imports.js', 'basic.js'])
+];
