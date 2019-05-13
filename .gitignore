@@ -10,3 +10,4 @@ __pycache__/
 
 # node
 /src/node_modules
+/src/home/vue/node_modules
