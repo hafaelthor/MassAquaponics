@@ -7,3 +7,6 @@ __pycache__/
 # webpack-stats.json files are auto-generated
 # and are particular to each file system
 /src/*/webpack-stats.json
+
+# node
+/src/node_modules
